@@ -1,0 +1,64 @@
+The candidate needs to perform this test with NodeJS + Angular + RDBMS( for database only).
+OR 
+They can use any view engine like Vash or any view engine they have worked on.
+
+
+1. HTML Page - Category Master with CRUD operations
+2. HTML Page - Product Master with CRUD operations. A product belongs to a category.
+3. The product list should also display ProductId, ProductName, CategoryName, and CategoryId.
+
+The product list should have pagination on the server side, which means extracting records from DB as per the page size on the view.
+So if the page size is 10 and the user is on page 9 then pull only records from 90 - 100.
+Just so you know - You have to use the RDBMS database only.
+
+***************************** XXX *****************************
+
+# INNER JOIN
+- Returns only the rows that have matching values in both the tables
+
+# RIGHT OUTER JOIN
+- 
+
+# LEFT OUTER JOIN
+- 
+
+https://www.youtube.com/watch?v=kA3tUG5NU94
+
+# Pagination
+
+1. Using limit and offset
+- select * from people order by first_name, id
+    limit 10
+    offset 0 (this line is implicit)
+it will give us first 10 records if we change offset to 10 it will give results from 11 - 20 and so on.
+offset = page_size * (page_num - 1)
+
+# Drawbacks of using limit and offset
+- We have to scroll down to all the 29 pages from start when we select 30th page.
+- If we are on first page and the 9th record is deleted then we goto 2nd page then 11th record is counted as 10 and we don't see 
+    the 11th record as 1st recod of 2nd page.
+
+2. Using Cursor (in general terms a cursor can be a key or token or next or previous)
+- select * from people order by first_name, id
+    limit 10
+    offset 0 (this line is implicit)
+-  Now this scenario 10th record's id and first_name is sent as next_page key to the client along with the response and whenever client 
+    requests for next page this next_page token is sent by client to db and db places it like below: 
+- select * from people where first_name = Aaron and id > 2999 order by first_name, id
+    limit 10
+    offset 0 (this line is implicit)
+- So above result will give us without skipping any deleted entry.
+
+# Drawbacks of using Cursor
+- Due to this approach we cannot move directly to page 10 but only move forward and backward.
+
+
+
+
+
+
+
+
+
+
+
