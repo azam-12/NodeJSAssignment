@@ -1,7 +1,5 @@
 
-const validateAddCategoryData = (req) => {
-    const { CategoryName, CategoryDescription, CategoryImage } = req.body;
-
+const validateAddCategoryData = (CategoryName, CategoryDescription) => {
     if(!CategoryName || !CategoryDescription){
         throw new Error("Category Name and Category Description are required feilds!");
     }
