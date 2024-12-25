@@ -5,17 +5,6 @@ const { DEFAULT_BOOK_IMG, DEFAULT_PUBLISHER, DEFAULT_ISBN } = require("../utils/
 const { fetchBookById, createBook, modifyBook, removeBook, fetchBooksOfCategory } = require("../services/bookService");
 
 
-const getTotalBooksOfCategory = (catId) => {
-    return new Promise((resolve, reject) => {
-        const q = `select count(*) as totalRecords from books where CategoryId = ?`;
-        connectDB.query(q, [catId], async(err, results) => {
-            if(err) return res.json({ message: "Faile to get the total number of records", data: err });
-            resolve(results[0].totalRecords);
-        });
-    });
-}
-
-
 const getBooksOfCategory = async(req, res) => {
     try {
         const catId = parseInt(req.params.catId);
